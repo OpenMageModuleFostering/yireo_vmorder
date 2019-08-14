@@ -1,0 +1,49 @@
+<?php
+/**
+ * VmOrder extension for Magento 
+ *
+ * @package     Yireo_VmOrder
+ * @author      Yireo (http://www.yireo.com/)
+ * @copyright   Copyright (c) 2015 Yireo
+ * @license     OSL v3
+ */
+?>
+
+<div class="content-header">
+<table cellspacing="0">
+	<tr>
+		<td style="width:80%;"><h3 class="icon-head head-tag"><?php echo $this->getHeader('VirtueMart Orders'); ?></h3></td>
+	</tr>
+</table>
+</div>
+
+<div class="vmorder-orders grid">
+<?php if($this->getCustomerOrders()->count() > 0): ?>
+    <table class="data">
+        <thead>
+            <tr class="headings">
+                <th><?php echo $this->__('Order ID'); ?></th>
+                <th><?php echo $this->__('Order Number'); ?></th>
+                <th><?php echo $this->__('Order Total'); ?></th>
+                <th><?php echo $this->__('Shipping'); ?></th>
+                <th><?php echo $this->__('Payment'); ?></th>
+                <th><?php echo $this->__('Creation Date'); ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->getCustomerOrders() as $order): ?>
+            <tr class="even">
+                <td><?php echo $order->getOrderId(); ?></td>
+                <td><?php echo $order->getOrderNumber(); ?></td>
+                <td><?php echo $order->getOrderTotal(); ?></td>
+                <td><?php echo $order->getShipMethodId(); ?></td>
+                <td><?php echo $order->getPaymentMethod(); ?></td>
+                <td><?php echo $order->getCreateDate(); ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    <p><?php echo $this->__('No orders found'); ?></p>
+<?php endif; ?>
+</div>

@@ -4,8 +4,8 @@
  *
  * @package     Yireo_VmOrder
  * @author      Yireo (http://www.yireo.com/)
- * @copyright   Copyright (c) 2009 Yireo (http://www.yireo.com/)
- * @license     VmOrder EULA (http://www.yireo.com/)
+ * @copyright   Copyright (c) 2013 Yireo (http://www.yireo.com/)
+ * @license     Open Source License
  */
 
 class Yireo_VmOrder_Block_Overview extends Mage_Adminhtml_Block_Widget_Container

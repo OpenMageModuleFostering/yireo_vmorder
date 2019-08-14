@@ -3,8 +3,8 @@
  * Yireo VmOrder for Magento 
  *
  * @package     Yire_VmOrder
- * @author      Jisse Reitsma (Jira ICT)
- * @copyright   Copyright (c) 2009 Jira ICT (http://www.jira.nl/)
+ * @author      Yireo
+ * @copyright   Copyright (c) 2013 Yireo (http://www.yireo.com/)
  * @license     Open Software License
  */
 

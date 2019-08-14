@@ -4,8 +4,8 @@
  *
  * @author Yireo
  * @package VmOrder
- * @copyright Copyright 2009
- * @license Yireo EULA (www.yireo.com)
+ * @copyright Copyright 2014
+ * @license Open Source License
  * @link http://www.yireo.com
  */
 

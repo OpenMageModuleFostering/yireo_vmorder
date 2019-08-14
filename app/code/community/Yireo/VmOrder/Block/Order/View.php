@@ -4,8 +4,8 @@
  *
  * @author Yireo
  * @package VmOrder
- * @copyright Copyright 2009
- * @license Yireo EULA (www.yireo.com)
+ * @copyright Copyright 2014
+ * @license Open Source License
  * @link http://www.yireo.com
  */
 
@@ -50,7 +50,7 @@ class Yireo_VmOrder_Block_Order_View extends Mage_Core_Block_Template
         if(empty($price)) {
             return null;
         }
-        return $this->getOrder()->getOrderCurrency().' '.number_format($price, 2);
+        return Mage::helper('core')->currency($price);
     }
 
     /*

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Yireo VmOrder
+ *
+ * @package     Yireo_VmOrder
+ * @author      Yireo (http://www.yireo.com/)
+ * @copyright   Copyright (c) 2013 Yireo (http://www.yireo.com/)
+ * @license     Open Software License
+ */
+-->
+<layout version="0.1.0">
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="vmorder"><name>vmorder_orders</name><path>vmorder/customer/orders</path><label>My Previous Orders</label></action>
+        </reference>
+    </customer_account>
+
+    <vmorder_customer_orders>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="vmorder/customer_orders_list" name="vmorder_orders" template="vmorder/customer/orders/list.phtml" />
+        </reference>
+        <reference name="head">
+            <action method="setTitle"><title>My Previous Orders</title></action>
+        </reference>
+    </vmorder_customer_orders>
+
+    <vmorder_customer_order>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="vmorder/customer_order_view" name="vmorder_order" template="vmorder/customer/order/view.phtml" />
+        </reference>
+        <reference name="head">
+            <action method="setTitle"><title>My Previous Orders</title></action>
+        </reference>
+    </vmorder_customer_order>
+</layout>

@@ -4,8 +4,8 @@
  *
  * @author Yireo
  * @package VmOrder
- * @copyright Copyright 2009
- * @license Yireo EULA (www.yireo.com)
+ * @copyright Copyright 2014
+ * @license Open Source License
  * @link http://www.yireo.com
  */
 
@@ -51,6 +51,6 @@ class Yireo_VmOrder_Block_Customer_Orders_List extends Mage_Core_Block_Template
      */
     public function getFormattedPrice($order)
     {
-        return $order->getOrderCurrency().' '.number_format($order->getOrderTotal(), 2);
+        return Mage::helper('core')->currency($order->getOrderTotal());
     }
 }

@@ -4,8 +4,8 @@
  *
  * @package     Yireo_VmOrder
  * @author      Yireo (http://www.yireo.com/)
- * @copyright   Copyright (c) 2009 Yireo (http://www.yireo.com/)
- * @license     VmOrder EULA (www.yireo.com)
+ * @copyright   Copyright (c) 2013 Yireo (http://www.yireo.com/)
+ * @license     Open Source License
  */
 
 class Yireo_VmOrder_Block_Overview_Grid extends Mage_Adminhtml_Block_Widget_Grid
@@ -24,19 +24,19 @@ class Yireo_VmOrder_Block_Overview_Grid extends Mage_Adminhtml_Block_Widget_Grid
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('vmorder/order')->getCollection();
+
         $this->setCollection($collection);
         parent::_prepareCollection();
 
         $collection = $this->getCollection();
         foreach($collection as $item) {
 
-            //$item->setOrderNumber('#'.Mage::helper('vmorder')->getOrderNumber($item));
             $item->setOrderNumber(strtoupper($item->getOrderNumber()));
 
             $customer = Mage::getModel('customer/customer')->load($item->getCustomerId());
-            $item->setCustomerName($customer->getName());
+            $item->setCustomerId($customer->getName());
 
-            $item->setOrderTotal($item->getOrderCurrency().' '.number_format($item->getOrderTotal(), 2));
+            $item->setOrderTotal(Mage::helper('core')->currency($item->getOrderTotal()));
             $item->setCreateDate(date('d M Y H:i:s', $item->getCreateDate()));
             $item->setModifyDate(date('d M Y H:i:s', $item->getModifyDate()));
         }
@@ -63,7 +63,7 @@ class Yireo_VmOrder_Block_Overview_Grid extends Mage_Adminhtml_Block_Widget_Grid
 
         $this->addColumn('customer_id', array(
             'header'=> Mage::helper('vmorder')->__('Customer'),
-            'index' => 'customer_name',
+            'index' => 'customer_id',
         ));
 
         $this->addColumn('order_total', array(
@@ -95,6 +95,27 @@ class Yireo_VmOrder_Block_Overview_Grid extends Mage_Adminhtml_Block_Widget_Grid
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('vmorder/index/view', array('id'=>$row->getId()));
+        return $this->getUrl('adminhtml/vmorder/view', array('id'=>$row->getId()));
+    }
+
+    protected function _addColumnFilterToCollection($column)
+    {
+        if ($column->getId() === 'customer_id' && $column->getFilter()->getValue()) {
+            $value = $column->getFilter()->getValue();
+            $customerIds = $this->filterCustomerIds($value);
+            $this->getCollection()->addFieldToFilter('customer_id' , array('IN', $customerIds));
+
+        } else {
+            parent::_addColumnFilterToCollection($column);
+        }
+
+        return $this;
+    }
+
+    protected function filterCustomerIds($search)
+    {
+        $collection = Mage::getModel('customer/customer')->getCollection();
+        $collection->addAttributeToFilter('firstname', array('like' => '%'.$search.'%'));
+        return $collection->getAllIds();
     }
 }

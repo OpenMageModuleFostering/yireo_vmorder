@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Yireo VmOrder for Magento 
+ *
+ * @author Yireo
+ * @package VmOrder
+ * @copyright Copyright 2014
+ * @license Open Source License
+ * @link http://www.yireo.com
+ */
+-->
+<config>
+    <menu>
+        <sales>
+            <children>
+                <order>
+                    <children>
+                        <vmorder translate="title" module="vmorder">
+                            <title>VirtueMart orders</title>
+                            <action>adminhtml/vmorder/index</action>
+                        </vmorder>
+                    </children>
+                </order>
+            </children>
+        </sales>
+    </menu>
+    <translate>
+        <modules>
+            <Yireo_VmOrder>
+                <files>
+                    <default>Yireo_VmOrder.csv</default>
+                </files>
+            </Yireo_VmOrder>
+        </modules>
+    </translate>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <order>
+                                <children>
+                                    <vmorder translate="title" module="vmorder">
+                                        <title>VirtueMart Orders</title>
+                                    </vmorder>
+                                </children>
+                            </order>
+                        </children>
+                    </sales>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <vmorder translate="title" module="vmorder">
+                                        <title>VmOrder Section</title>
+                                    </vmorder>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

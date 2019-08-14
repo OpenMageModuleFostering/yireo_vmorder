@@ -2,17 +2,16 @@
 /**
  * VmOrder extension for Magento 
  *
- * @category    design_default
  * @package     Yireo_VmOrder
  * @author      Yireo (http://www.yireo.com/)
- * @copyright   Copyright (c) 2009 Yireo (http://www.yireo.com/)
- * @license     Yireo Software EULA (www.yireo.com)
+ * @copyright   Copyright (c) 2013 Yireo (http://www.yireo.com/)
+ * @license     Open Source License (OSL)
  */
 
 /**
  * VmOrder admin controller
  */
-class Yireo_VmOrder_IndexController extends Mage_Adminhtml_Controller_Action
+class Yireo_VmOrder_VmorderController extends Mage_Adminhtml_Controller_Action
 {
     /**
      * Common method

@@ -5,8 +5,8 @@
  *
  * @author Yireo
  * @package VmOrder
- * @copyright Copyright 2011
- * @license Yireo EULA (www.yireo.com)
+ * @copyright Copyright 2015
+ * @license Open Source License
  * @link http://www.yireo.com
  */
 -->
@@ -14,7 +14,7 @@
 
     <modules>
         <Yireo_VmOrder>
-            <version>0.10.0</version>
+            <version>0.10.17</version>
         </Yireo_VmOrder>
     </modules>
 
@@ -70,56 +70,21 @@
                 </connection>
             </vmorder_read>
         </resources>
-
 	</global>
 
-    <adminhtml>
-        <menu>
-            <sales>
-                <children>
-                    <order>
-                        <children>
-                            <vmorder translate="title" module="vmorder">
-                                <title>VirtueMart orders</title>
-                                <action>vmorder/index/index</action>
-                            </vmorder>
-                        </children>
-                    </order>
-                </children>
-            </sales>
-        </menu>
-        <translate>
-            <modules>
-                <Yireo_VmOrder>
-                    <files>
-                        <default>Yireo_VmOrder.csv</default>
-                    </files>
-                </Yireo_VmOrder>
-            </modules>
-        </translate>
-        <acl>
-            <resources>
-                <admin>
-                    <children>
-                        <system>
-                            <children>
-                                <config>
-                                    <children>
-                                        <vmorder translate="title" module="vmorder">
-                                            <title>VmOrder Section</title>
-                                        </vmorder>
-                                    </children>
-                                </config>
-                            </children>
-                        </system>
-                    </children>
-                </admin>
-            </resources>
-        </acl>
-    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <vmorder after="Mage_Adminhtml">Yireo_VmOrder</vmorder>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 
     <frontend>
-
         <routers>
             <vmorder>
                 <use>standard</use>
@@ -130,9 +95,9 @@
             </vmorder>
         </routers>
 
-        <secure_url>
+        <!--<secure_url>
             <vmorder>vmorder/customer/</vmorder>
-        </secure_url>
+        </secure_url>-->
 
         <layout>
             <updates>
@@ -143,4 +108,14 @@
         </layout>
 
     </frontend>
+
+    <adminhtml>
+    <layout>
+        <updates>
+            <vmorder module="Yireo_VmOrder">
+                <file>vmorder.xml</file>
+            </vmorder>
+        </updates>
+    </layout>
+    </adminhtml>
 </config>
