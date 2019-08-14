@@ -14,10 +14,8 @@ $orders = $this->getOrders();
 
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <div class="page-head">
-    <h3><?php echo $this->__('My Previous Orders') ?></h3>
+    <h3><?php echo $this->__('Old Orders') ?></h3>
 </div>
-
-<?php if(!empty($orders) && $orders->getSize() > 0) : ?>
 
 <p><?php echo $this->__('These are orders originating from our old website'); ?></p>
 
@@ -36,20 +34,22 @@ $orders = $this->getOrders();
         </tr>
     </thead>
     <tbody>
-        <?php foreach($orders as $order) : ?>
+        <?php if(!empty($orders)) { ?>
+            <?php foreach($orders as $order) { ?>
             <tr>
                 <td><?php echo strftime('%d %B %Y', $order->getCreateDate()); ?></td>
                 <td><a href="<?php echo $this->getOrderLink($order); ?>"><?php echo $this->getOrderNumber($order); ?></a></td>
                 <td><?php echo $this->getFormattedPrice($order); ?></td>
                 <td><?php echo $order->getOrderStatusName(); ?></td>
             </tr>
-        <?php endforeach; ?>
+            <?php } ?>
+        <?php } else { ?>
+            <tr>
+                <td colspan="5"><?php echo $this->__('Not available'); ?></td>
+            </tr>
+        <?php } ?>
     </tbody>
 </table>
 
 <script type="text/javascript">decorateTable('vm-orders-table')</script>
 <?php echo $this->getPagerHtml(); ?>
-        
-<?php else : ?>
-<p><?php echo $this->__('No previous orders available'); ?></p>
-<?php endif; ?>

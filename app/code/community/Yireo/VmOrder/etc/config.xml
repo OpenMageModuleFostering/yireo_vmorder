@@ -5,7 +5,7 @@
  *
  * @author Yireo
  * @package VmOrder
- * @copyright Copyright 2015
+ * @copyright Copyright 2013
  * @license Open Source License
  * @link http://www.yireo.com
  */
@@ -14,7 +14,7 @@
 
     <modules>
         <Yireo_VmOrder>
-            <version>0.10.17</version>
+            <version>0.10.7</version>
         </Yireo_VmOrder>
     </modules>
 
@@ -108,14 +108,4 @@
         </layout>
 
     </frontend>
-
-    <adminhtml>
-    <layout>
-        <updates>
-            <vmorder module="Yireo_VmOrder">
-                <file>vmorder.xml</file>
-            </vmorder>
-        </updates>
-    </layout>
-    </adminhtml>
 </config>

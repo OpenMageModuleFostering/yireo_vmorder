@@ -24,17 +24,17 @@ class Yireo_VmOrder_Block_Overview_Grid extends Mage_Adminhtml_Block_Widget_Grid
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('vmorder/order')->getCollection();
-
         $this->setCollection($collection);
         parent::_prepareCollection();
 
         $collection = $this->getCollection();
         foreach($collection as $item) {
 
+            //$item->setOrderNumber('#'.Mage::helper('vmorder')->getOrderNumber($item));
             $item->setOrderNumber(strtoupper($item->getOrderNumber()));
 
             $customer = Mage::getModel('customer/customer')->load($item->getCustomerId());
-            $item->setCustomerId($customer->getName());
+            $item->setCustomerName($customer->getName());
 
             $item->setOrderTotal(Mage::helper('core')->currency($item->getOrderTotal()));
             $item->setCreateDate(date('d M Y H:i:s', $item->getCreateDate()));
@@ -63,7 +63,7 @@ class Yireo_VmOrder_Block_Overview_Grid extends Mage_Adminhtml_Block_Widget_Grid
 
         $this->addColumn('customer_id', array(
             'header'=> Mage::helper('vmorder')->__('Customer'),
-            'index' => 'customer_id',
+            'index' => 'customer_name',
         ));
 
         $this->addColumn('order_total', array(
@@ -96,26 +96,5 @@ class Yireo_VmOrder_Block_Overview_Grid extends Mage_Adminhtml_Block_Widget_Grid
     public function getRowUrl($row)
     {
         return $this->getUrl('adminhtml/vmorder/view', array('id'=>$row->getId()));
-    }
-
-    protected function _addColumnFilterToCollection($column)
-    {
-        if ($column->getId() === 'customer_id' && $column->getFilter()->getValue()) {
-            $value = $column->getFilter()->getValue();
-            $customerIds = $this->filterCustomerIds($value);
-            $this->getCollection()->addFieldToFilter('customer_id' , array('IN', $customerIds));
-
-        } else {
-            parent::_addColumnFilterToCollection($column);
-        }
-
-        return $this;
-    }
-
-    protected function filterCustomerIds($search)
-    {
-        $collection = Mage::getModel('customer/customer')->getCollection();
-        $collection->addAttributeToFilter('firstname', array('like' => '%'.$search.'%'));
-        return $collection->getAllIds();
     }
 }
