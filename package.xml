@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>Yireo_VmOrder</name>
+    <version>0.10.0</version>
+    <stability>stable</stability>
+    <license>Open Source License</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Adds VirtueMart orders to Magento</summary>
+    <description>Adds VirtueMart orders to Magento</description>
+    <notes>Adds VirtueMart orders to Magento</notes>
+    <authors><author><name>Yireo</name><user>yireo</user><email>info@yireo.com</email></author></authors>
+    <date>2013-02-26</date>
+    <time>09:17:46</time>
+    <contents><target name="mageetc"><dir name="modules"><file name="Yireo_VmOrder.xml" hash="db8f1f19b440a2d8989675f73388fb42"/></dir></target><target name="magecommunity"><dir name="Yireo"><dir name="VmOrder"><dir name="Block"><dir name="Customer"><dir name="Order"><file name="View.php" hash="5c38917c864bcf7c806b927197d52932"/></dir><dir name="Orders"><file name="List.php" hash="be9ab0882cf56f1a9eb3574e94ddbced"/></dir></dir><dir name="Order"><file name="View.php" hash="b61cd80c58017e70d6606009e3190d19"/></dir><dir name="Overview"><file name="Grid.php" hash="793df54298f064e01b1d3b856134aa53"/></dir><file name="Overview.php" hash="c1c7b6038fe847cd636acb7756f50267"/></dir><dir name="Helper"><file name="Data.php" hash="f40247478861bb4aee9af9b0c627cccd"/></dir><dir name="Model"><dir name="Mysql4"><dir name="Order"><file name="Collection.php" hash="21b956d08dbb9d0beb4343dc5e74a227"/><dir name="Item"><file name="Collection.php" hash="373d02c1343a180b970283827c09c889"/></dir><file name="Item.php" hash="46fbec650db0da115217a609004b1223"/></dir><file name="Order.php" hash="095b08455d74cef141bde64af631c9b5"/></dir><dir name="Order"><file name="Item.php" hash="1d4873f84b7271faf522532d323dde4c"/></dir><file name="Order.php" hash="c1ff561e6d5ec1807ada0e60b1eb6bfa"/></dir><dir name="controllers"><file name="CustomerController.php" hash="06454676da560a7b92cd3f6643b4b4dd"/><file name="IndexController.php" hash="96736c8378c979f25dcdbca13cf7c698"/></dir><dir name="etc"><file name="config.xml" hash="ebd0e4271c9f1f0d2039b2a8562d7766"/></dir><dir name="sql"><dir name="vmorder_setup"><file name="mysql4-install-0.5.4.php" hash="08285995386a7283955a6ada5778315e"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="template"><dir name="vmorder"><dir name="customer"><dir name="order"><file name="view.phtml" hash="db9157c243d749b7c7993d7376384544"/></dir><dir name="orders"><file name="list.phtml" hash="ec6ea97c3626fff06d9c03d871ca1bad"/></dir></dir></dir></dir></dir></dir></dir><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="template"><dir name="vmorder"><dir name="order"><file name="view.phtml" hash="096f5268d14b319856c9142e3bbb34fd"/></dir><file name="overview.phtml" hash="38ee3b682cf1bc0ab1133cf3f0630dd1"/></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.8</min><max>6.0.0</max></php></required></dependencies>
+</package>

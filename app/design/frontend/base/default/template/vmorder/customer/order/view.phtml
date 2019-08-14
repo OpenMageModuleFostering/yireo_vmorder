@@ -1,0 +1,135 @@
+<?php
+/**
+ * VmOrder
+ *
+ * @author Yireo
+ * @package VmOrder
+ * @copyright Copyright 2009
+ * @license Yireo EULA (www.yireo.com)
+ * @link http://www.yireo.com
+ * @todo:
+ * - link to product-page if product_id > 0
+ */
+
+$order = $this->getOrder();
+$order_items = $this->getOrderItems();
+$order_customernote = ($order->getCustomerNote()) ? $order->getCustomerNote() : $this->__('No comment');
+?>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="page-head">
+    <h3><?php echo $this->__('Order'); ?> <?php echo $this->getOrderNumber($order); ?></h3>
+</div>
+
+<table cellspacing="0" class="data-table" id="vm-orderitems-table">
+    <thead>
+        <tr>
+            <th colspan="2"><?php echo $this->__('Order information'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><label><?php echo $this->__('Order number'); ?></label></td>
+            <td><?php echo $this->getOrderNumber($order); ?></td>
+        </tr>
+        <tr>
+            <td><label><?php echo $this->__('Order date'); ?></label></td>
+            <td><?php echo strftime('%A, %d %B %Y %H:%M', $order->getCreateDate());; ?></td>
+        </tr>
+        <tr>
+            <td><label><?php echo $this->__('Order status'); ?></label></td>
+            <td><?php echo $order->getOrderStatusName(); ?></td>
+        </tr>
+        <tr>
+            <td><label><?php echo $this->__('Payment method'); ?></label></td>
+            <td><?php echo $order->getPaymentMethod(); ?></td>
+        </tr>
+        <tr>
+            <td><label><?php echo $this->__('Shipping method'); ?></label></td>
+            <td><?php echo $this->getShippingMethod($order); ?></td>
+        </tr>
+    </tbody>
+</table>
+&nbsp;
+
+<table cellspacing="0" class="data-table" id="vm-orderitems-table">
+    <col />
+    <col />
+    <col width="15%" />
+    <col width="15%" />
+    <col width="15%" />
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Product'); ?></th>
+            <th><?php echo $this->__('SKU'); ?></th>
+            <th><?php echo $this->__('Quantity'); ?></th>
+            <th><?php echo $this->__('Price'); ?></th>
+            <th><?php echo $this->__('Final price'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if(!empty($order_items)) { ?>
+            <?php foreach($order_items as $item) { ?>
+            <tr>
+                <td><?php echo $item->getProductName(); ?></td>
+                <td><?php echo $item->getProductSku(); ?></td>
+                <td><?php echo $item->getProductQuantity(); ?></td>
+                <td><?php echo $this->getFormattedPrice($item->getProductItemPrice()); ?></td>
+                <td><?php echo $this->getFormattedPrice($item->getProductFinalPrice()); ?></td>
+            </tr>
+            <?php } ?>
+        <?php } else { ?>
+            <tr>
+                <td colspan="4"><?php echo $this->__('Not available'); ?></td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+&nbsp;
+
+<table cellspacing="0" class="data-table" id="vm-orderitems-table">
+    <thead>
+        <tr>
+            <th colspan="2"><?php echo $this->__('Order total'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="label">Subtotal</td>
+            <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderSubtotal()); ?></span></td>
+        </tr>
+        <tr>
+            <td class="label">Shipping</td>
+            <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderShipping()); ?></span></td>
+        </tr>
+        <tr>
+            <td class="label">Discount</td>
+            <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderDiscount()); ?></span></td>
+        </tr>
+        <tr>
+            <td class="label">Tax</td>
+            <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderTax()); ?></span></td>
+        </tr>
+        <tr>
+            <td class="label">Total</td>
+            <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderTotal()); ?></span></td>
+        </tr>
+    </tbody>
+</table>
+&nbsp;
+
+<table cellspacing="0" class="data-table" id="vm-orderitems-table">
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Comment'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><?php echo $order_customernote; ?></td>
+        </tr>
+    </tbody>
+</table>
+&nbsp;
+
+<script type="text/javascript">decorateTable('vm-orderitems-table')</script>

@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Yireo VmOrder for Magento 
+ *
+ * @author Yireo
+ * @package VmOrder
+ * @copyright Copyright 2011
+ * @license Yireo EULA (www.yireo.com)
+ * @link http://www.yireo.com
+ */
+-->
+<config>
+
+    <modules>
+        <Yireo_VmOrder>
+            <version>0.10.0</version>
+        </Yireo_VmOrder>
+    </modules>
+
+    <global>
+        <blocks>
+            <vmorder>
+                <class>Yireo_VmOrder_Block</class>
+            </vmorder>
+        </blocks>
+
+        <helpers>
+            <vmorder>
+                <class>Yireo_VmOrder_Helper</class>
+            </vmorder>
+        </helpers>
+
+        <models>
+            <vmorder>
+                <class>Yireo_VmOrder_Model</class>
+                <resourceModel>vmorder_mysql4</resourceModel>
+            </vmorder>
+            <vmorder_mysql4>
+                <class>Yireo_VmOrder_Model_Mysql4</class>
+                <entities>
+                    <order>
+                        <table>vmorder_order</table>
+                    </order>
+                    <order_item>
+                        <table>vmorder_order_item</table>
+                    </order_item>
+                </entities>
+            </vmorder_mysql4>
+        </models>
+
+        <resources>
+            <vmorder_setup>
+                <setup>
+                    <module>Yireo_VmOrder</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </vmorder_setup>
+            <vmorder_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </vmorder_write>
+            <vmorder_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </vmorder_read>
+        </resources>
+
+	</global>
+
+    <adminhtml>
+        <menu>
+            <sales>
+                <children>
+                    <order>
+                        <children>
+                            <vmorder translate="title" module="vmorder">
+                                <title>VirtueMart orders</title>
+                                <action>vmorder/index/index</action>
+                            </vmorder>
+                        </children>
+                    </order>
+                </children>
+            </sales>
+        </menu>
+        <translate>
+            <modules>
+                <Yireo_VmOrder>
+                    <files>
+                        <default>Yireo_VmOrder.csv</default>
+                    </files>
+                </Yireo_VmOrder>
+            </modules>
+        </translate>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <vmorder translate="title" module="vmorder">
+                                            <title>VmOrder Section</title>
+                                        </vmorder>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <frontend>
+
+        <routers>
+            <vmorder>
+                <use>standard</use>
+                <args>
+                    <module>Yireo_VmOrder</module>
+                    <frontName>vmorder</frontName>
+                </args>
+            </vmorder>
+        </routers>
+
+        <secure_url>
+            <vmorder>vmorder/customer/</vmorder>
+        </secure_url>
+
+        <layout>
+            <updates>
+                <vmorder module="Yireo_VmOrder">
+                    <file>vmorder.xml</file>
+                </vmorder>
+            </updates>
+        </layout>
+
+    </frontend>
+</config>

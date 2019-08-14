@@ -1,0 +1,30 @@
+<?php
+/**
+ * Downloadable Manager extension for Magento 
+ *
+ * @package     Yireo_VmOrder
+ * @author      Yireo (http://www.yireo.com/)
+ * @copyright   Copyright (c) 2009 Yireo
+ * @license     VmOrder EULA (http://www.yireo.com/)
+ */
+?>
+
+<div class="content-header">
+<table cellspacing="0">
+	<tr>
+		<td style="width:80%;"><h3 class="icon-head head-tag"><?php echo $this->getHeader('Overview'); ?></h3></td>
+	</tr>
+</table>
+</div>
+
+<div class="entry-edit">
+    <?php echo $this->getGridHtml() ?>
+</div>
+
+<script type="text/javascript">
+var vmorderForm = new varienForm('vmorder_edit_form');
+function doSubmit() {
+    vmorderForm.submit();
+    return true;
+}
+</script>

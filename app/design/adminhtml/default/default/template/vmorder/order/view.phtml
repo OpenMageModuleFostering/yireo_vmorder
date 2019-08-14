@@ -1,0 +1,174 @@
+<?php
+/**
+ * VmOrder
+ *
+ * @author Yireo
+ * @package VmOrder
+ * @copyright Copyright 2009
+ * @license Yireo EULA (www.yireo.com)
+ * @link http://www.yireo.com
+ */
+
+$order = $this->getOrder();
+$customer = Mage::getModel('customer/customer')->load($order->getCustomerId());
+$order_items = $this->getOrderItems();
+?>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="content">
+</div>
+
+<div class="content-header">
+<table cellspacing="0">
+	<tr>
+		<td style="width:80%;">
+            <h3 class="icon-head head-tag"><?php echo $this->__('Order'); ?> <?php echo $this->getOrderNumber($order); ?></h3>
+        </td>
+	</tr>
+</table>
+</div>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Customer information'); ?></h4>
+    </div>
+    <div class="fieldset ">
+        <table class="form-list" cellspacing="2">
+        <col style="width:300px" />
+        <col />
+        <tbody>
+            <tr>
+                <td><?php echo $this->__('Customer name'); ?></td>
+                <td><a href="<?php echo $this->getCustomerLink($customer); ?>"><?php echo $customer->getName(); ?></a></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Order information'); ?></h4>
+    </div>
+    <div class="fieldset ">
+        <table class="form-list" cellspacing="2">
+        <col style="width:300px" />
+        <col />
+        <tbody>
+            <tr>
+                <td><label><?php echo $this->__('Order number'); ?></label></td>
+                <td><?php echo $this->getOrderNumber($order); ?></td>
+            </tr>
+            <tr>
+                <td><label><?php echo $this->__('Unique ID'); ?></label></td>
+                <td><?php echo strtoupper($order->getOrderNumber()); ?></td>
+            </tr>
+            <tr>
+                <td><label><?php echo $this->__('Created'); ?></label></td>
+                <td><?php echo strftime('%A, %d %B %Y %H:%M', $order->getCreateDate()); ?></td>
+            </tr>
+            <tr>
+                <td><label><?php echo $this->__('Modified'); ?></label></td>
+                <td><?php echo strftime('%A, %d %B %Y %H:%M', $order->getModifyDate()); ?></td>
+            </tr>
+            <tr>
+                <td><label><?php echo $this->__('Order status'); ?></label></td>
+                <td><?php echo $order->getOrderStatusName(); ?></td>
+            </tr>
+            <tr>
+                <td><label><?php echo $this->__('Payment method'); ?></label></td>
+                <td><?php echo $order->getPaymentMethod(); ?></td>
+            </tr>
+            <tr>
+                <td><label><?php echo $this->__('Shipping method'); ?></label></td>
+                <td><?php echo $this->getShippingMethod($order); ?></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Order items'); ?></h4>
+    </div>
+    <div class="fieldset ">
+        <table class="form-list" cellspacing="5">
+        <thead>
+            <tr>
+                <th width="400"><?php echo $this->__('Product'); ?></th>
+                <th width="100"><?php echo $this->__('SKU'); ?></th>
+                <th width="80"><?php echo $this->__('Items'); ?></th>
+                <th width="120"><?php echo $this->__('Price'); ?></th>
+                <th width="120"><?php echo $this->__('Total'); ?></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php if(!empty($order_items)) { ?>
+            <?php foreach($order_items as $item) { ?>
+            <tr>
+                <td><?php echo $item->getProductName(); ?></td>
+                <td><?php echo $item->getProductSku(); ?></td>
+                <td><?php echo $item->getProductQuantity(); ?></td>
+                <td><?php echo $this->getFormattedPrice($item->getProductItemPrice()); ?></td>
+                <td><?php echo $this->getFormattedPrice($item->getProductFinalPrice()); ?></td>
+            </tr>
+            <?php } ?>
+        <?php } else { ?>
+            <tr>
+                <td colspan="4"><?php echo $this->__('Not available'); ?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="box-left entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Comment'); ?></h4>
+    </div>
+    <div class="fieldset ">
+        <table class="form-list" cellspacing="5">
+        <tbody>
+            <tr>
+                <td><?php echo $order->getCustomerNote(); ?></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="box-right entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Order totals'); ?></h4>
+    </div>
+    <div class="order-totals">
+        <table width="100%" cellspacing="0">
+        <tbody>
+            <tr>
+                <td class="label">Subtotal</td>
+                <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderSubtotal()); ?></span></td>
+            </tr>
+            <tr>
+                <td class="label">Shipping</td>
+                <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderShipping()); ?></span></td>
+            </tr>
+            <tr>
+                <td class="label">Discount</td>
+                <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderDiscount()); ?></span></td>
+            </tr>
+            <tr>
+                <td class="label">Tax</td>
+                <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderTax()); ?></span></td>
+            </tr>
+            <tr>
+                <td class="label">Total</td>
+                <td><span class="price"><?php echo $this->getFormattedPrice($order->getOrderTotal()); ?></span></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">decorateTable('vm-orderitems-table')</script>
